@@ -1,11 +1,11 @@
 // Copyright 2022 NNTU-CS
 #include "train.h"
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 int main() {
-  srand(time(0));
+  unsigned int seed = time(0);
   for (int n = 2; n <= 50; n += 2) {
     Train train1;
     int count = n;
@@ -20,7 +20,7 @@ int main() {
     Train train3;
     count = n;
     while (count--)
-      train3.addCar(rand() % 2);
+      train3.addCar(rand_r(&seed) % 2);
     train3.getLength();
     std::cout << n << "\t" << train1.getOpCount() << "\t\t"
               << train2.getOpCount() << "\t\t"
