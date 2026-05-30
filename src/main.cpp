@@ -23,7 +23,8 @@ int main() {
       train3.addCar(rand() % 2);
     train3.getLength();
     std::cout << n << "\t" << train1.getOpCount() << "\t\t"
-              << train2.getOpCount() << "\t\t" << train3.getOpCount() << std::endl;
+              << train2.getOpCount() << "\t\t"
+              << train3.getOpCount() << std::endl;
   }
   return 0;
 }
