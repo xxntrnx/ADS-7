@@ -1,34 +1,32 @@
 // Copyright 2022 NNTU-CS
-#include "train.h"
-
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
+#include "train.h"
 
 int main() {
-  unsigned int seed = time(0);
-  for (int n = 2; n <= 50; n += 2) {
-    Train train1;
-    int count = n;
-    while (count--)
-      train1.addCar(false);
-    train1.getLength();
-
-    Train train2;
-    count = n;
-    while (count--)
-      train2.addCar(true);
-    train2.getLength();
-
-    Train train3;
-    count = n;
-    while (count--)
-      train3.addCar(rand_r(&seed) % 2);
-    train3.getLength();
-
-    std::cout << n << "\t" << train1.getOpCount() << "\t\t"
-              << train2.getOpCount() << "\t\t"
-              << train3.getOpCount() << std::endl;
+  std::srand(std::time(nullptr));
+  
+  for (int len = 2; len <= 50; len += 2) {
+    Train offTrain;
+    for (int i = 0; i < len; ++i)
+      offTrain.addCar(false);
+    offTrain.getLength();
+    
+    Train onTrain;
+    for (int i = 0; i < len; ++i)
+      onTrain.addCar(true);
+    onTrain.getLength();
+    
+    Train randTrain;
+    for (int i = 0; i < len; ++i)
+      randTrain.addCar(std::rand() % 2);
+    randTrain.getLength();
+    
+    std::cout << len << "\t" 
+              << offTrain.getOpCount() << "\t"
+              << onTrain.getOpCount() << "\t"
+              << randTrain.getOpCount() << std::endl;
   }
   return 0;
 }
