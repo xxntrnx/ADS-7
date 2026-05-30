@@ -1,5 +1,6 @@
 // Copyright 2021 NNTU-CS
 #include "train.h"
+
 Train::Train() {
     first = nullptr;
     countOp = 0;
@@ -27,6 +28,13 @@ int Train::getLength() {
     
     countOp = 0;
     Car* current = first;
+    
+    Car* temp = first;
+    do {
+        temp->light = false;
+        temp = temp->next;
+    } while (temp != first);
+    
     current->light = true;
     int length = 1;
     
@@ -43,10 +51,25 @@ int Train::getLength() {
                 current = current->prev;
                 countOp++;
             }
-        } else {
-            break;
+        } 
+        else {
+            bool allLit = true;
+            Car* check = first;
+            for (int i = 0; i < length; i++) {
+                if (!check->light) {
+                    allLit = false;
+                    break;
+                }
+                check = check->next;
+            }
+            if (allLit) {
+                break;
+            }
+            current = current->next;
+            countOp++;
         }
     }
+    
     return length;
 }
 
